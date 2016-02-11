@@ -36,7 +36,7 @@ public class TouchManager : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if(Input.GetMouseButtonDown(0)) {
-            Debug.Log(Input.mousePosition.ToString());
+            //Debug.Log(Input.mousePosition.ToString());
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit)) {
@@ -46,19 +46,16 @@ public class TouchManager : MonoBehaviour {
                 
             }
         }
-
-        if (Input.touchCount > 0) {
-           // text.text = (Input.GetTouch(0).position.ToString());
-         
-        }
     
     }
 
-
-   
     void touch(Transform form) {
         GameObject hitObt = form.gameObject;
         text.text = hitObt.name;
-        Destroy(hitObt);
+        bool state = hitObt.GetComponent<State>().isBlack;
+        if(state) {
+          GameObject.Find("RowManager").SendMessage("ClickedBlackKBox", hitObt);// hitObt);
+          //send a event for row
+        } else { Debug.Log("you are dead"); }
     }
 }
