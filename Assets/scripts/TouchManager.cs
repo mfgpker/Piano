@@ -52,10 +52,7 @@ public class TouchManager : MonoBehaviour {
     void touch(Transform form) {
         GameObject hitObt = form.gameObject;
         text.text = hitObt.name;
-        bool state = hitObt.GetComponent<State>().isBlack;
-        if(state) {
-          GameObject.Find("RowManager").SendMessage("ClickedBlackKBox", hitObt);// hitObt);
-          //send a event for row
-        } else { Debug.Log("you are dead"); }
+        GameObject.Find("RowManager").SendMessage("ClickedBlackKBox", hitObt);
+      
     }
 }
